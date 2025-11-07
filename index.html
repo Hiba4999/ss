@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop watch</title>
+</head>
+<style>
+     body{
+            font-family:"Poppins", sans-serif;
+        background-color:cadetblue;
+          display: flex;
+        justify-content: center;
+        align-items: center;
+         height: 100vh; 
+     }
+    .timer_box{
+        text-align:center;
+       background:white;
+       border-radius:8px;
+        width: 400px;
+        height: 270px;
+    }
+    #timer {
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 5px;
+      background-color: navy;
+      COLOR:white;
+      border-radius:8px;
+    }
+</style>
+<body>
+    <div class="timer_box">
+        <h1><u>Stop Watch</u></h1>
+     <div id="timer">00:00:00</div>
+    <button onclick="start_timer()">Start</button>
+    <button onclick="end_timer()">Stop</button>
+    <button onclick="reset_timer()">Reset</button>
+    </div>
+
+   <script>
+    let start;
+    let passedtim=0;
+    let runningtime;
+    function start_timer(){
+         start=Date.now()-passedtim;
+         runningtime=setInterval(showtim,10);
+    }
+
+    function end_timer(){
+      clearInterval(runningtime);
+    }
+
+    function reset_timer(){
+      clearInterval(runningtime);
+      passedtim=0;
+      document.getElementById("timer").innerText="00:00:00";
+    }
+
+    function showtim(){
+      passedtim=Date.now()-start;
+     let milli = Math.floor((passedtim % 1000) / 10);
+      let secon = Math.floor((passedtim / 1000) % 60);
+      let min = Math.floor(passedtim / 60000);
+      document.getElementById("timer").innerText= addzer(min) + ":"+ addzer(secon) + ":" + addzer(milli);
+    }
+
+    function addzer(a){
+      if(a<10){
+        return "0"+a;
+      }
+      else{
+        return a;
+      }
+    }
+   </script>
+
+
+</body>
+
+
+
+</html>
